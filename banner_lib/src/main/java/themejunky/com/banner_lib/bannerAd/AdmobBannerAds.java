@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.AdListener;
@@ -12,22 +13,34 @@ import com.google.android.gms.ads.AdView;
 
 import themejunky.com.banner_lib.R;
 
-public class BannerAdmob {
+public class AdmobBannerAds {
     private AdView mAdView;
-    private final String numeTag = "InfoAds";
-        public BannerAdmob(Context context, RelativeLayout view){
+    private Listener.AdsListener listener;
+    private final String numeTag;
+    private final RelativeLayout myView;
+    private final Context context;
 
+    public AdmobBannerAds(Context context, String nameTag, String key, RelativeLayout myView, Listener.AdsListener listener) {
+        this.context = context;
+        this.numeTag = nameTag;
+        this.listener = listener;
+        this.myView = myView;
+        initAdmobBanner();
+    }
+
+    public void initAdmobBanner(){
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view1 = inflater.inflate(R.layout.container_banner_admob,null);
+        View view1 = inflater.inflate(R.layout.container_banner_admob, null);
 
         mAdView = view1.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("2184F858FFCDF534E26419F85B421D1F").build();
         mAdView.loadAd(adRequest);
 
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 Log.d(numeTag, "Admob Banner: Loaded!");
+                listener.isBannerLoaded("admob");
             }
 
             @Override
@@ -48,10 +61,12 @@ public class BannerAdmob {
             @Override
             public void onAdClosed() {
                 Log.d(numeTag, "Admob Banner" + ": Closed!");
+                listener.isBannerClosed();
             }
         });
 
-        view.removeAllViews();
-        view.addView(view1);
+        myView.removeAllViews();
+        myView.addView(view1);
     }
+
 }
