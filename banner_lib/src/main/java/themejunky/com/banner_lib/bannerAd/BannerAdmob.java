@@ -12,48 +12,45 @@ import com.google.android.gms.ads.AdView;
 
 import themejunky.com.banner_lib.R;
 
-/**
- * Created by Junky2 on 8/28/2018.
- */
-
 public class BannerAdmob {
     private AdView mAdView;
-    public BannerAdmob(Context context, RelativeLayout view){
+    private final String numeTag = "InfoAds";
+        public BannerAdmob(Context context, RelativeLayout view){
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view1 = inflater.inflate(R.layout.container_banner_admob,null);
+
         mAdView = view1.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                Log.d("awwas","onAdLoaded");
+                Log.d(numeTag, "Admob Banner: Loaded!");
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-                Log.d("awwas","onAdFailedToLoad: " +errorCode);
+                Log.d(numeTag, "Admob Banner: Failed To Load: " + errorCode);
             }
 
             @Override
             public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
+                Log.d(numeTag, "Admob Banner: onAdOpened!");
             }
 
             @Override
             public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
+                Log.d(numeTag, "Admob Banner: onAdLeftApplication!");
             }
 
             @Override
             public void onAdClosed() {
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
+                Log.d(numeTag, "Admob Banner" + ": Closed!");
             }
         });
+
         view.removeAllViews();
         view.addView(view1);
     }
