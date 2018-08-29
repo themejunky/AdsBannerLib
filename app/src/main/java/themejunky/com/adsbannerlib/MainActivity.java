@@ -7,9 +7,10 @@ import android.widget.RelativeLayout;
 
 import themejunky.com.banner_lib.bannerAd.Listener;
 import themejunky.com.banner_lib.bannerAd.ManagerBannerAds;
+import themejunky.com.banner_lib.bannerAd.MyListener;
 
 
-public class MainActivity extends AppCompatActivity implements Listener.AdsListener, Listener.NoAdsLoaded {
+public class MainActivity extends AppCompatActivity implements MyListener, Listener.AdsListener, Listener.NoAdsLoaded {
     private ManagerBannerAds managerBannerAds;
     private RelativeLayout containerBanner;
 
@@ -19,27 +20,34 @@ public class MainActivity extends AppCompatActivity implements Listener.AdsListe
         setContentView(R.layout.activity_main);
 
         containerBanner = findViewById(R.id.containerBanner);
-        //new AdmobBannerAds(this,containerBanner);
-        //new AdmobBannerAds(this,"ca-app-pub-3940256099942544/6300978111", containerBanner);
 
         managerBannerAds = ManagerBannerAds.getInstance(this,"InfoAds");
-        managerBannerAds.initAdmob ("ca-app-pub-5322508131338449/4399656421", containerBanner);
+        managerBannerAds.initAdmob ("ca-app-pub-5322508131338449/4399656421", containerBanner, this);
+        //managerBannerAds.initFacebook ("ca-app-pub-5322508131338449/4399656421", containerBanner, this);
         managerBannerAds.setBannerAdsListener(this);
         managerBannerAds.setNoAdsLoadedListener(this);
     }
 
+
+    @Override
+    public void whatAdIsLoaded(String theAd) {
+        Log.d("InfoAds", "whatAdIsLoaded "+theAd);
+    }
+
+
     @Override
     public void isBannerClosed() {
-
+        Log.d("InfoAds", "isBannerClosed");
     }
 
     @Override
     public void isBannerLoaded(String theAd) {
-        Log.d("InfoAds","isBannerLoaded "+theAd);
+        //this line is not reached
+        Log.d("InfoAds", "isBannerLoaded "+theAd);
     }
 
     @Override
     public void noAdsLoaded(String action) {
-
+        Log.d("InfoAds", "noAdsLoaded");
     }
 }

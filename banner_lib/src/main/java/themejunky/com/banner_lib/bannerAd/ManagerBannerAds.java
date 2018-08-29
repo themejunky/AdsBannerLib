@@ -1,21 +1,18 @@
 package themejunky.com.banner_lib.bannerAd;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class ManagerBannerAds  implements Listener.AdsListener {
     private final Context context;
     private static ManagerBannerAds instance;
-    private final String tagName;
+    private String tagName;
     private Listener.AdsListener listener;
     private Listener.NoAdsLoaded noAdsLoadedListener;
-    //private FacebookBannerAds facebookBannerAds;
+    private FacebookBannerAds facebookBannerAds;
     private AdmobBannerAds admobBannerAds;
-    private String loadedAd;
+    private MyListener mListener;
 
     public static synchronized ManagerBannerAds getInstance(Context context, String tagName) {
         if (instance == null) {
@@ -31,49 +28,22 @@ public class ManagerBannerAds  implements Listener.AdsListener {
     }
 
 
-    public void initFacebook(String key) {
-        if (key != null) {
-            Log.d(tagName, "initFacebook context: "+context+" tagName: "+tagName+" key: "+key);
-            //facebookBannerAds = new FacebookBannerAds(context, tagName, key, this);
+    public void initFacebook(String keyFacebook, RelativeLayout myView, MyListener nListener) {
+        if (keyFacebook != null) {
+            mListener = nListener;
+            Log.d(tagName, "initFacebook context: "+context+" key: "+keyFacebook+" nListener "+nListener);
+            facebookBannerAds = new FacebookBannerAds(context, tagName, keyFacebook, myView, this);
         }
     }
 
-    public void initAdmob(String key, RelativeLayout myView) {
-        if (key != null) {
-            Log.d(tagName, "initAdmob context: "+context+" tagName: "+tagName+" key: "+key);
-            //admobBannerAds = new AdmobBannerAds(context, tagName, key, myView);
-            //admobBannerAds = admobBannerAds.getInstance(mContext, key, this);
-            //admobBannerAds = new AdmobBannerAds(context, tagName, key, myView, listener);
-            admobBannerAds = new AdmobBannerAds(context, tagName, key, myView, this);
+    public void initAdmob(String keyAdmob, RelativeLayout myView, MyListener nListener) {
+        if (keyAdmob != null) {
+            mListener = nListener;
+            Log.d(tagName, "initAdmob context: "+context+" key: "+keyAdmob+" nListener "+nListener);
+            admobBannerAds = new AdmobBannerAds(context, tagName, keyAdmob, myView, this);
         }
     }
 
-
-    /*
-
-    @Override
-    public void isBannerClosed() {
-        if (listener != null) {
-            Log.d(tagName,"isBannerClosed - ");
-            //listener.afterBannerIsClosed(action);
-        } else {
-            Log.d(tagName, "listener null");
-        }
-    }
-
-    @Override
-    public void isBannerLoaded(String theAd) {
-        Log.d("InfoAds","isBannerLoaded - "+theAd);
-
-        if (theAd.equals("admob")){
-            loadedAd = "admob";
-            //showBannerAd(this, "admob");
-        } else if (theAd.equals("facebook")){
-            loadedAd = "facebook";
-            //showBannerAd(this, "facebook");
-        }
-    }
-    */
 
     public void setBannerAdsListener(Listener.AdsListener adsListener) {
         this.listener = adsListener;
@@ -95,7 +65,9 @@ public class ManagerBannerAds  implements Listener.AdsListener {
 
     @Override
     public void isBannerLoaded(String theAd) {
-        Log.d("InfoAds","isBannerLoaded - "+theAd);
+        Log.d(tagName,"isBannerLoaded - "+theAd);
+        mListener.whatAdIsLoaded(theAd);
     }
+
 
 }

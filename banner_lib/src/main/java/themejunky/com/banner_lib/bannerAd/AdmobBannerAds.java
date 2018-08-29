@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.AdListener;
@@ -16,19 +15,19 @@ import themejunky.com.banner_lib.R;
 public class AdmobBannerAds {
     private AdView mAdView;
     private Listener.AdsListener listener;
-    private final String numeTag;
-    private final RelativeLayout myView;
-    private final Context context;
+    private String numeTag;
+    private RelativeLayout myView;
+    private Context context;
 
-    public AdmobBannerAds(Context context, String nameTag, String key, RelativeLayout myView, Listener.AdsListener listener) {
+    public AdmobBannerAds(Context context, String nameTag, String keyAdmob, RelativeLayout myView, Listener.AdsListener listener) {
         this.context = context;
         this.numeTag = nameTag;
         this.listener = listener;
         this.myView = myView;
-        initAdmobBanner();
+        initAdmobBanner(keyAdmob);
     }
 
-    public void initAdmobBanner(){
+    public void initAdmobBanner(String keyAdmob){
         LayoutInflater inflater = LayoutInflater.from(context);
         View view1 = inflater.inflate(R.layout.container_banner_admob, null);
 
