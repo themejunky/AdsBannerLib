@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
-public class ManagerBannerAds  implements Listener.AdsListener {
+public class ManagerBannerAds implements Listener.AdsListener {
     private final Context context;
     private static ManagerBannerAds instance;
     private String tagName;
@@ -12,7 +12,6 @@ public class ManagerBannerAds  implements Listener.AdsListener {
     private Listener.NoAdsLoaded noAdsLoadedListener;
     private FacebookBannerAds facebookBannerAds;
     private AdmobBannerAds admobBannerAds;
-    private MyListener mListener;
 
     public static synchronized ManagerBannerAds getInstance(Context context, String tagName) {
         if (instance == null) {
@@ -28,18 +27,18 @@ public class ManagerBannerAds  implements Listener.AdsListener {
     }
 
 
-    public void initFacebook(String keyFacebook, RelativeLayout myView, MyListener nListener) {
+    public void initFacebook(String keyFacebook, RelativeLayout myView) {
         if (keyFacebook != null) {
-            mListener = nListener;
-            Log.d(tagName, "initFacebook context: "+context+" key: "+keyFacebook+" nListener "+nListener);
+            //listener = nListener;
+            Log.d(tagName, "initFacebook context: "+context+" key: "+keyFacebook+" nListener "+listener);
             facebookBannerAds = new FacebookBannerAds(context, tagName, keyFacebook, myView, this);
         }
     }
 
-    public void initAdmob(String keyAdmob, RelativeLayout myView, MyListener nListener) {
+    public void initAdmob(String keyAdmob, RelativeLayout myView) {
         if (keyAdmob != null) {
-            mListener = nListener;
-            Log.d(tagName, "initAdmob context: "+context+" key: "+keyAdmob+" nListener "+nListener);
+            //mListener = nListener;
+            Log.d(tagName, "initAdmob context: "+context+" key: "+keyAdmob+" nListener "+listener);
             admobBannerAds = new AdmobBannerAds(context, tagName, keyAdmob, myView, this);
         }
     }
@@ -65,8 +64,8 @@ public class ManagerBannerAds  implements Listener.AdsListener {
 
     @Override
     public void isBannerLoaded(String theAd) {
-        Log.d(tagName,"isBannerLoaded - "+theAd);
-        mListener.whatAdIsLoaded(theAd);
+        //Log.d(tagName,"isBannerLoaded "+theAd);
+        listener.isBannerLoaded(theAd);
     }
 
 
