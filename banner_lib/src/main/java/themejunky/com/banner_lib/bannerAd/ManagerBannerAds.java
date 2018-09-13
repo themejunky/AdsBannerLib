@@ -29,7 +29,6 @@ public class ManagerBannerAds implements Listener.AdsListener {
 
     public void initFacebook(String keyFacebook, RelativeLayout myView) {
         if (keyFacebook != null) {
-            //listener = nListener;
             Log.d(tagName, "initFacebook context: "+context+" key: "+keyFacebook+" nListener "+listener);
             facebookBannerAds = new FacebookBannerAds(context, tagName, keyFacebook, myView, this);
         }
@@ -37,7 +36,6 @@ public class ManagerBannerAds implements Listener.AdsListener {
 
     public void initAdmob(String keyAdmob, RelativeLayout myView) {
         if (keyAdmob != null) {
-            //mListener = nListener;
             Log.d(tagName, "initAdmob context: "+context+" key: "+keyAdmob+" nListener "+listener);
             admobBannerAds = new AdmobBannerAds(context, tagName, keyAdmob, myView, this);
         }
