@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements Listener.AdsListe
         setContentView(R.layout.activity_main);
 
         containerBanner = findViewById(R.id.containerBanner);
-
         managerBannerAds = ManagerBannerAds.getInstance(this,"InfoAds");
         managerBannerAds.initAdmob ("ca-app-pub-5322508131338449/4399656421", containerBanner);
         //managerBannerAds.initFacebook ("ca-app-pub-5322508131338449/4399656421", containerBanner);

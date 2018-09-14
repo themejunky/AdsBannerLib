@@ -1,13 +1,16 @@
 package themejunky.com.banner_lib.bannerAd;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import themejunky.com.banner_lib.R;
@@ -27,12 +30,12 @@ public class AdmobBannerAds {
         initAdmobBanner(keyAdmob);
     }
 
-    public void initAdmobBanner(String keyAdmob){
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view1 = inflater.inflate(R.layout.container_banner_admob, null);
 
-        mAdView = view1.findViewById(R.id.adView);
+    public void initAdmobBanner(String keyAdmob){
+        mAdView = new AdView(context);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("2184F858FFCDF534E26419F85B421D1F").build();
+        mAdView.setAdUnitId(keyAdmob);
+        mAdView.setAdSize(AdSize.SMART_BANNER);
         mAdView.loadAd(adRequest);
 
         mAdView.setAdListener(new AdListener() {
@@ -65,7 +68,7 @@ public class AdmobBannerAds {
         });
 
         myView.removeAllViews();
-        myView.addView(view1);
+        myView.addView(mAdView);
     }
 
 }
