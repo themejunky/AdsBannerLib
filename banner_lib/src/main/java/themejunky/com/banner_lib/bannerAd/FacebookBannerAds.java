@@ -52,6 +52,7 @@ public class FacebookBannerAds {
         //View view1 = inflater.inflate(R.layout.container_banner_facebook, null);;
 
         nativeBannerAd = new NativeBannerAd(context, keyFacebook);
+        AdSettings.addTestDevice("cc433d54-f202-4ab0-a1a1-1bc6d5f1fa7c");
         AdSettings.addTestDevice("e46ccfd7-8274-402f-b315-3f94d7e17f91");
         AdSettings.addTestDevice("ed135967-ba53-40aa-ab9c-9944ce920e2f");
         nativeBannerAd.setAdListener(new NativeAdListener() {
