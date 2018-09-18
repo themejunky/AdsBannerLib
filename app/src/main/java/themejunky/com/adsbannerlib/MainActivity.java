@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements Listener.AdsListe
 
         containerBanner = findViewById(R.id.containerBanner);
         managerBannerAds = ManagerBannerAds.getInstance(this,"InfoAds");
-        managerBannerAds.initAdmob ("ca-app-pub-5322508131338449/4399656421", containerBanner);
-        //managerBannerAds.initFacebook ("ca-app-pub-5322508131338449/4399656421", containerBanner);
+        //managerBannerAds.initAdmob ("ca-app-pub-5322508131338449/9342651448", containerBanner);
+         managerBannerAds.initFacebook ("223324501480181_487160701763225", containerBanner);
         managerBannerAds.setBannerAdsListener(this);
         managerBannerAds.setNoAdsLoadedListener(this);
     }

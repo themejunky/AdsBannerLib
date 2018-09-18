@@ -1,7 +1,9 @@
 package themejunky.com.banner_lib.bannerAd;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 public class ManagerBannerAds implements Listener.AdsListener {
@@ -12,8 +14,9 @@ public class ManagerBannerAds implements Listener.AdsListener {
     private Listener.NoAdsLoaded noAdsLoadedListener;
     private FacebookBannerAds facebookBannerAds;
     private AdmobBannerAds admobBannerAds;
+    public ViewGroup nContainer;
 
-    public static synchronized ManagerBannerAds getInstance(Context context, String tagName) {
+    public static synchronized ManagerBannerAds getInstance(Activity context, String tagName) {
         if (instance == null) {
             return new ManagerBannerAds(context, tagName);
         } else {
@@ -21,7 +24,7 @@ public class ManagerBannerAds implements Listener.AdsListener {
         }
     }
 
-    public ManagerBannerAds(Context context, String tagName) {
+    public ManagerBannerAds(Activity context, String tagName) {
         this.context = context;
         this.tagName = tagName;
     }

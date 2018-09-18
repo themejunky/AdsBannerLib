@@ -33,7 +33,7 @@ public class AdmobBannerAds {
 
     public void initAdmobBanner(String keyAdmob){
         mAdView = new AdView(context);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("2184F858FFCDF534E26419F85B421D1F").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.setAdUnitId(keyAdmob);
         mAdView.setAdSize(AdSize.SMART_BANNER);
         mAdView.loadAd(adRequest);
